@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.people.PeopleDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.people.People" >
+	<result column="id" property="id"/>
+	<result column="account" property="account"/>
+	<result column="email" property="email"/>
+	<result column="pwd" property="pwd"/>
+	<result column="name" property="name"/>
+	<result column="mobile" property="mobile"/>
+	<result column="type" property="type"/>
+	<result column="is_available" property="isAvailable"/>
+	<result column="login_count" property="loginCount"/>
+	<result column="login_time" property="loginTime"/>
+	<result column="is_deleted" property="isDeleted"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="create_by" property="createBy"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="is_admin" property="isAdmin"/>
+</resultMap>
+       
+<!-- people table all fields -->
+<sql id="Base_Column_List" >
+	 id,account,email,pwd,name,mobile,type,is_available,login_count,login_time,is_deleted,create_time,update_time,create_by,update_by,is_admin
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="account != null and account != ''" >
+	    and account =  #{account}
+</if>
+	<if test="email != null and email != ''" >
+	    and email =  #{email}
+</if>
+	<if test="pwd != null and pwd != ''" >
+	    and pwd =  #{pwd}
+</if>
+	<if test="name != null and name != ''" >
+	    and name =  #{name}
+</if>
+	<if test="mobile != null and mobile != ''" >
+	    and mobile =  #{mobile}
+</if>
+	<if test="type != null and type != ''" >
+	    and type =  #{type}
+</if>
+	<if test="isAvailable != null and isAvailable != ''" >
+	    and is_available =  #{isAvailable}
+</if>
+	<if test="loginCount != null and loginCount != ''" >
+	    and login_count =  #{loginCount}
+</if>
+	<if test="loginTime != null and loginTime != ''" >
+	    and login_time =  #{loginTime}
+</if>
+	<if test="isDeleted != null and isDeleted != ''" >
+	    and is_deleted =  #{isDeleted}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="isAdmin != null and isAdmin != ''" >
+	    and is_admin =  #{isAdmin}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="account != null and account != ''" >
+	    and upper(account) like  CONCAT('%', upper(#{account}), '%')
+	</if>
+	<if test="email != null and email != ''" >
+	    and upper(email) like  CONCAT('%', upper(#{email}), '%')
+	</if>
+	<if test="pwd != null and pwd != ''" >
+	    and upper(pwd) like  CONCAT('%', upper(#{pwd}), '%')
+	</if>
+	<if test="name != null and name != ''" >
+	    and upper(name) like  CONCAT('%', upper(#{name}), '%')
+	</if>
+	<if test="mobile != null and mobile != ''" >
+	    and upper(mobile) like  CONCAT('%', upper(#{mobile}), '%')
+	</if>
+	<if test="type != null and type != ''" >
+	    and upper(type) like  CONCAT('%', upper(#{type}), '%')
+	</if>
+	<if test="isAvailable != null and isAvailable != ''" >
+	    and upper(is_available) like  CONCAT('%', upper(#{isAvailable}), '%')
+	</if>
+	<if test="loginCount != null and loginCount != ''" >
+	    and upper(login_count) like  CONCAT('%', upper(#{loginCount}), '%')
+	</if>
+	<if test="loginTime != null and loginTime != ''" >
+	    and upper(login_time) like  CONCAT('%', upper(#{loginTime}), '%')
+	</if>
+	<if test="isDeleted != null and isDeleted != ''" >
+	    and upper(is_deleted) like  CONCAT('%', upper(#{isDeleted}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="isAdmin != null and isAdmin != ''" >
+	    and upper(is_admin) like  CONCAT('%', upper(#{isAdmin}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into people(id,account,email,pwd,name,mobile,type,is_available,login_count,login_time,is_deleted,create_time,update_time,create_by,update_by,is_admin) values( #{id, jdbcType=VARCHAR},#{account, jdbcType=VARCHAR},#{email, jdbcType=VARCHAR},#{pwd, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{mobile, jdbcType=VARCHAR},#{type, jdbcType=VARCHAR},#{isAvailable, jdbcType=CHAR},#{loginCount, jdbcType=INTEGER},#{loginTime, jdbcType=DATE},#{isDeleted, jdbcType=CHAR},now(),now(),#{createBy, jdbcType=VARCHAR},#{updateBy, jdbcType=VARCHAR},#{isAdmin, jdbcType=CHAR})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update people set account=#{account, jdbcType=VARCHAR},email=#{email, jdbcType=VARCHAR},pwd=#{pwd, jdbcType=VARCHAR},name=#{name, jdbcType=VARCHAR},mobile=#{mobile, jdbcType=VARCHAR},type=#{type, jdbcType=VARCHAR},is_available=#{isAvailable, jdbcType=CHAR},login_count=#{loginCount, jdbcType=INTEGER},login_time=#{loginTime, jdbcType=DATE},is_deleted=#{isDeleted, jdbcType=CHAR},update_time=now(),update_by=#{updateBy, jdbcType=VARCHAR},is_admin=#{isAdmin, jdbcType=CHAR} 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update people set 
+	<trim  suffixOverrides="," >
+	<if test="account != null  ">
+		account=#{account},
+	</if>
+	<if test="email != null  ">
+		email=#{email},
+	</if>
+	<if test="pwd != null  ">
+		pwd=#{pwd},
+	</if>
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="mobile != null  ">
+		mobile=#{mobile},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="isAvailable != null  ">
+		is_available=#{isAvailable},
+	</if>
+	<if test="loginCount != null  ">
+		login_count=#{loginCount},
+	</if>
+	<if test="loginTime != null  ">
+		login_time=#{loginTime},
+	</if>
+	<if test="isDeleted != null  ">
+		is_deleted=#{isDeleted},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="isAdmin != null  ">
+		is_admin=#{isAdmin},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from people where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 用户 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from people where id = #{id}
+</select>
+
+<!-- 用户 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from people 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from people
+	where 1=1 
+		<if test="account != null and account != ''">
+			and upper(account)=upper(#{account})
+		</if>
+		<if test="email != null and email != ''">
+			and upper(email)=upper(#{email})
+		</if>
+		<if test="name != null and name != ''">
+			and upper(name)=upper(#{name})
+		</if>
+		<if test="mobile != null and mobile != ''">
+			and upper(mobile)=upper(#{mobile})
+		</if>
+		<if test="id != null and id != ''">
+			and id&lt;&gt;#{id}
+		</if>
+</select>
+
+
+<!-- 用于登录检查 -->
+<select id="queryLogin" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from people 
+	where pwd=#{pwd}
+	and (
+		upper(account)=upper(#{account})
+		or upper(email)=upper(#{account})
+		or upper(mobile)=upper(#{account})
+		or upper(name)=upper(#{account})
+	)
+</select>
+
+<!-- 查询用户列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from people 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

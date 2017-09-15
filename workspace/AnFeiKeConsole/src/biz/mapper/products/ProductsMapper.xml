@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.products.ProductsDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.products.Products" >
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="types" property="types"/>
+	<result column="brand" property="brand"/>
+	<result column="seats_no" property="seatsNo"/>
+	<result column="ranges" property="ranges"/>
+	<result column="ranges_unit" property="rangesUnit"/>
+	<result column="speeds" property="speeds"/>
+	<result column="speeds_unit" property="speedsUnit"/>
+	<result column="loads" property="loads"/>
+	<result column="loads_unit" property="loadsUnit"/>
+	<result column="photo_path" property="photoPath"/>
+	<result column="short_desc" property="shortDesc"/>
+	<result column="description" property="description" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="manufacture" property="manufacture"/>
+	<result column="produce_date" property="produceDate"/>
+	<result column="price" property="price"/>
+	<result column="price_unit" property="priceUnit"/>
+	<result column="pre_pay" property="prePay"/>
+	<result column="pre_pay_unit" property="prePayUnit"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- products table all fields -->
+<sql id="Base_Column_List" >
+	 id,name,types,brand,seats_no,ranges,ranges_unit,speeds,speeds_unit,loads,loads_unit,photo_path,short_desc,description,manufacture,produce_date,price,price_unit,pre_pay,pre_pay_unit,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="name != null and name != ''" >
+	    and name =  #{name}
+</if>
+	<if test="types != null and types != ''" >
+	    and types =  #{types}
+</if>
+	<if test="brand != null and brand != ''" >
+	    and brand =  #{brand}
+</if>
+	<if test="seatsNo != null and seatsNo != ''" >
+	    and seats_no =  #{seatsNo}
+</if>
+	<if test="ranges != null and ranges != ''" >
+	    and ranges =  #{ranges}
+</if>
+	<if test="rangesUnit != null and rangesUnit != ''" >
+	    and ranges_unit =  #{rangesUnit}
+</if>
+	<if test="speeds != null and speeds != ''" >
+	    and speeds =  #{speeds}
+</if>
+	<if test="speedsUnit != null and speedsUnit != ''" >
+	    and speeds_unit =  #{speedsUnit}
+</if>
+	<if test="loads != null and loads != ''" >
+	    and loads =  #{loads}
+</if>
+	<if test="loadsUnit != null and loadsUnit != ''" >
+	    and loads_unit =  #{loadsUnit}
+</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and photo_path =  #{photoPath}
+</if>
+	<if test="shortDesc != null and shortDesc != ''" >
+	    and short_desc =  #{shortDesc}
+</if>
+	<if test="description != null and description != ''" >
+	    and description =  #{description}
+</if>
+	<if test="manufacture != null and manufacture != ''" >
+	    and manufacture =  #{manufacture}
+</if>
+	<if test="produceDate != null and produceDate != ''" >
+	    and produce_date =  #{produceDate}
+</if>
+	<if test="price != null and price != ''" >
+	    and price =  #{price}
+</if>
+	<if test="priceUnit != null and priceUnit != ''" >
+	    and price_unit =  #{priceUnit}
+</if>
+	<if test="prePay != null and prePay != ''" >
+	    and pre_pay =  #{prePay}
+</if>
+	<if test="prePayUnit != null and prePayUnit != ''" >
+	    and pre_pay_unit =  #{prePayUnit}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="name != null and name != ''" >
+	    and upper(name) like  CONCAT('%', upper(#{name}), '%')
+	</if>
+	<if test="types != null and types != ''" >
+	    and upper(types) like  CONCAT('%', upper(#{types}), '%')
+	</if>
+	<if test="brand != null and brand != ''" >
+	    and upper(brand) like  CONCAT('%', upper(#{brand}), '%')
+	</if>
+	<if test="seatsNo != null and seatsNo != ''" >
+	    and upper(seats_no) like  CONCAT('%', upper(#{seatsNo}), '%')
+	</if>
+	<if test="ranges != null and ranges != ''" >
+	    and upper(ranges) like  CONCAT('%', upper(#{ranges}), '%')
+	</if>
+	<if test="rangesUnit != null and rangesUnit != ''" >
+	    and upper(ranges_unit) like  CONCAT('%', upper(#{rangesUnit}), '%')
+	</if>
+	<if test="speeds != null and speeds != ''" >
+	    and upper(speeds) like  CONCAT('%', upper(#{speeds}), '%')
+	</if>
+	<if test="speedsUnit != null and speedsUnit != ''" >
+	    and upper(speeds_unit) like  CONCAT('%', upper(#{speedsUnit}), '%')
+	</if>
+	<if test="loads != null and loads != ''" >
+	    and upper(loads) like  CONCAT('%', upper(#{loads}), '%')
+	</if>
+	<if test="loadsUnit != null and loadsUnit != ''" >
+	    and upper(loads_unit) like  CONCAT('%', upper(#{loadsUnit}), '%')
+	</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and upper(photo_path) like  CONCAT('%', upper(#{photoPath}), '%')
+	</if>
+	<if test="shortDesc != null and shortDesc != ''" >
+	    and upper(short_desc) like  CONCAT('%', upper(#{shortDesc}), '%')
+	</if>
+	<if test="description != null and description != ''" >
+	    and upper(description) like  CONCAT('%', upper(#{description}), '%')
+	</if>
+	<if test="manufacture != null and manufacture != ''" >
+	    and upper(manufacture) like  CONCAT('%', upper(#{manufacture}), '%')
+	</if>
+	<if test="produceDate != null and produceDate != ''" >
+	    and upper(produce_date) like  CONCAT('%', upper(#{produceDate}), '%')
+	</if>
+	<if test="price != null and price != ''" >
+	    and upper(price) like  CONCAT('%', upper(#{price}), '%')
+	</if>
+	<if test="priceUnit != null and priceUnit != ''" >
+	    and upper(price_unit) like  CONCAT('%', upper(#{priceUnit}), '%')
+	</if>
+	<if test="prePay != null and prePay != ''" >
+	    and upper(pre_pay) like  CONCAT('%', upper(#{prePay}), '%')
+	</if>
+	<if test="prePayUnit != null and prePayUnit != ''" >
+	    and upper(pre_pay_unit) like  CONCAT('%', upper(#{prePayUnit}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into products(id,name,types,brand,seats_no,ranges,ranges_unit,speeds,speeds_unit,loads,loads_unit,photo_path,short_desc,description,manufacture,produce_date,price,price_unit,pre_pay,pre_pay_unit,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{types, jdbcType=VARCHAR},#{brand, jdbcType=VARCHAR},#{seatsNo, jdbcType=INTEGER},#{ranges, jdbcType=INTEGER},#{rangesUnit, jdbcType=VARCHAR},#{speeds, jdbcType=INTEGER},#{speedsUnit, jdbcType=VARCHAR},#{loads, jdbcType=INTEGER},#{loadsUnit, jdbcType=VARCHAR},#{photoPath, jdbcType=VARCHAR},#{shortDesc, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{manufacture, jdbcType=VARCHAR},#{produceDate, jdbcType=DATE},#{price, jdbcType=OTHER},#{priceUnit, jdbcType=OTHER},#{prePay, jdbcType=OTHER},#{prePayUnit, jdbcType=OTHER},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update products set name=#{name, jdbcType=VARCHAR},types=#{types, jdbcType=VARCHAR},brand=#{brand, jdbcType=VARCHAR},seats_no=#{seatsNo, jdbcType=INTEGER},ranges=#{ranges, jdbcType=INTEGER},ranges_unit=#{rangesUnit, jdbcType=VARCHAR},speeds=#{speeds, jdbcType=INTEGER},speeds_unit=#{speedsUnit, jdbcType=VARCHAR},loads=#{loads, jdbcType=DOUBLE},loads_unit=#{loadsUnit, jdbcType=VARCHAR},photo_path=#{photoPath, jdbcType=VARCHAR},short_desc=#{shortDesc, jdbcType=VARCHAR},description=#{description, jdbcType=VARCHAR},manufacture=#{manufacture, jdbcType=VARCHAR},produce_date=#{produceDate, jdbcType=DATE},price=#{price, jdbcType=DOUBLE},price_unit=#{priceUnit, jdbcType=OTHER},pre_pay=#{prePay, jdbcType=DOUBLE},pre_pay_unit=#{prePayUnit, jdbcType=OTHER},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update products set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="types != null  ">
+		types=#{types},
+	</if>
+	<if test="brand != null  ">
+		brand=#{brand},
+	</if>
+	<if test="seatsNo != null  ">
+		seats_no=#{seatsNo},
+	</if>
+	<if test="ranges != null  ">
+		ranges=#{ranges},
+	</if>
+	<if test="rangesUnit != null  ">
+		ranges_unit=#{rangesUnit},
+	</if>
+	<if test="speeds != null  ">
+		speeds=#{speeds},
+	</if>
+	<if test="speedsUnit != null  ">
+		speeds_unit=#{speedsUnit},
+	</if>
+	<if test="loads != null  ">
+		loads=#{loads},
+	</if>
+	<if test="loadsUnit != null  ">
+		loads_unit=#{loadsUnit},
+	</if>
+	<if test="photoPath != null  ">
+		photo_path=#{photoPath},
+	</if>
+	<if test="shortDesc != null  ">
+		short_desc=#{shortDesc},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	<if test="manufacture != null  ">
+		manufacture=#{manufacture},
+	</if>
+	<if test="produceDate != null  ">
+		produce_date=#{produceDate},
+	</if>
+	<if test="price != null  ">
+		price=#{price},
+	</if>
+	<if test="priceUnit != null  ">
+		price_unit=#{priceUnit},
+	</if>
+	<if test="prePay != null  ">
+		pre_pay=#{prePay},
+	</if>
+	<if test="prePayUnit != null  ">
+		pre_pay_unit=#{prePayUnit},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from products where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 机型 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from products where id = #{id}
+</select>
+
+<!-- 机型 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from products 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from products
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询机型列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from products 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

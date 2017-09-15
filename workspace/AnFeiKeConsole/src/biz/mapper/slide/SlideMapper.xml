@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.slide.SlideDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.slide.Slide" >
+	<result column="id" property="id"/>
+	<result column="slide_type" property="slideType"/>
+	<result column="theme_title" property="themeTitle"/>
+	<result column="photo_path" property="photoPath"/>
+	<result column="theme_desc" property="themeDesc" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="theme_comments" property="themeComments" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="display_order" property="displayOrder"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- slide table all fields -->
+<sql id="Base_Column_List" >
+	 id,slide_type,theme_title,photo_path,theme_desc,theme_comments,display_order,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="slideType != null and slideType != ''" >
+	    and slide_type =  #{slideType}
+</if>
+	<if test="themeTitle != null and themeTitle != ''" >
+	    and theme_title =  #{themeTitle}
+</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and photo_path =  #{photoPath}
+</if>
+	<if test="themeDesc != null and themeDesc != ''" >
+	    and theme_desc =  #{themeDesc}
+</if>
+	<if test="themeComments != null and themeComments != ''" >
+	    and theme_comments =  #{themeComments}
+</if>
+	<if test="displayOrder != null and displayOrder != ''" >
+	    and display_order =  #{displayOrder}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="slideType != null and slideType != ''" >
+	    and upper(slide_type) like  CONCAT('%', upper(#{slideType}), '%')
+	</if>
+	<if test="themeTitle != null and themeTitle != ''" >
+	    and upper(theme_title) like  CONCAT('%', upper(#{themeTitle}), '%')
+	</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and upper(photo_path) like  CONCAT('%', upper(#{photoPath}), '%')
+	</if>
+	<if test="themeDesc != null and themeDesc != ''" >
+	    and upper(theme_desc) like  CONCAT('%', upper(#{themeDesc}), '%')
+	</if>
+	<if test="themeComments != null and themeComments != ''" >
+	    and upper(theme_comments) like  CONCAT('%', upper(#{themeComments}), '%')
+	</if>
+	<if test="displayOrder != null and displayOrder != ''" >
+	    and upper(display_order) like  CONCAT('%', upper(#{displayOrder}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into slide(id,slide_type,theme_title,photo_path,theme_desc,theme_comments,display_order,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{slideType, jdbcType=VARCHAR},#{themeTitle, jdbcType=VARCHAR},#{photoPath, jdbcType=VARCHAR},#{themeDesc, jdbcType=OTHER},#{themeComments, jdbcType=OTHER},#{displayOrder, jdbcType=INTEGER},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update slide set slide_type=#{slideType, jdbcType=VARCHAR},theme_title=#{themeTitle, jdbcType=VARCHAR},photo_path=#{photoPath, jdbcType=VARCHAR},theme_desc=#{themeDesc, jdbcType=OTHER},theme_comments=#{themeComments, jdbcType=OTHER},display_order=#{displayOrder, jdbcType=INTEGER},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update slide set 
+	<trim  suffixOverrides="," >
+	<if test="slideType != null  ">
+		slide_type=#{slideType},
+	</if>
+	<if test="themeTitle != null  ">
+		theme_title=#{themeTitle},
+	</if>
+	<if test="photoPath != null  ">
+		photo_path=#{photoPath},
+	</if>
+	<if test="themeDesc != null  ">
+		theme_desc=#{themeDesc},
+	</if>
+	<if test="themeComments != null  ">
+		theme_comments=#{themeComments},
+	</if>
+	<if test="displayOrder != null  ">
+		display_order=#{displayOrder},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from slide where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 幻灯片信息 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from slide where id = #{id}
+</select>
+
+<!-- 幻灯片信息 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from slide 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from slide
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询幻灯片信息列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from slide 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

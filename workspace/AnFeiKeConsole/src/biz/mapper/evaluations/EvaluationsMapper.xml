@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.evaluations.EvaluationsDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.evaluations.Evaluations" >
+	<result column="id" property="id"/>
+	<result column="description" property="description"/>
+	<result column="main_id" property="mainId"/>
+	<result column="main_type" property="mainType"/>
+	<result column="is_available" property="isAvailable"/>
+	<result column="score" property="score"/>
+	<result column="is_deleted" property="isDeleted"/>
+	<result column="ip" property="ip"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="create_by" property="createBy"/>
+	<result column="update_by" property="updateBy"/>
+</resultMap>
+       
+<!-- evaluations table all fields -->
+<sql id="Base_Column_List" >
+	 id,description,main_id,main_type,is_available,score,ip,is_deleted,create_time,update_time,create_by,update_by
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="description != null and description != ''" >
+	    and description =  #{description}
+</if>
+	<if test="mainId != null and mainId != ''" >
+	    and main_id =  #{mainId}
+</if>
+	<if test="mainType != null and mainType != ''" >
+	    and main_type =  #{mainType}
+</if>
+	<if test="isAvailable != null and isAvailable != ''" >
+	    and is_available =  #{isAvailable}
+</if>
+	<if test="score != null and score != ''" >
+	    and score =  #{score}
+</if>
+	<if test="ip != null and ip != ''" >
+	    and ip =  #{ip}
+</if>
+	<if test="isDeleted != null and isDeleted != ''" >
+	    and is_deleted =  #{isDeleted}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="description != null and description != ''" >
+	    and upper(description) like  CONCAT('%', upper(#{description}), '%')
+	</if>
+	<if test="mainId != null and mainId != ''" >
+	    and upper(main_id) like  CONCAT('%', upper(#{mainId}), '%')
+	</if>
+	<if test="mainType != null and mainType != ''" >
+	    and upper(main_type) like  CONCAT('%', upper(#{mainType}), '%')
+	</if>
+	<if test="isAvailable != null and isAvailable != ''" >
+	    and upper(is_available) like  CONCAT('%', upper(#{isAvailable}), '%')
+	</if>
+	<if test="score != null and score != ''" >
+	    and upper(score) like  CONCAT('%', upper(#{score}), '%')
+	</if>
+	<if test="ip != null and ip != ''" >
+	    and upper(ip) like  CONCAT('%', upper(#{ip}), '%')
+	</if>
+	<if test="isDeleted != null and isDeleted != ''" >
+	    and upper(is_deleted) like  CONCAT('%', upper(#{isDeleted}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into evaluations(id,description,main_id,main_type,is_available,score,ip,is_deleted,create_time,update_time,create_by,update_by) values( #{id, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{mainId, jdbcType=VARCHAR},#{mainType, jdbcType=VARCHAR},#{isAvailable, jdbcType=CHAR},#{score, jdbcType=INTEGER},#{ip, jdbcType=VARCHAR},#{isDeleted, jdbcType=CHAR},now(),now(),#{createBy, jdbcType=VARCHAR},#{updateBy, jdbcType=VARCHAR})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update evaluations set description=#{description, jdbcType=VARCHAR},main_id=#{mainId, jdbcType=VARCHAR},main_type=#{mainType, jdbcType=VARCHAR},is_available=#{isAvailable, jdbcType=CHAR},score=#{score, jdbcType=INTEGER},ip=#{ip, jdbcType=VARCHAR},is_deleted=#{isDeleted, jdbcType=CHAR},update_time=now(),update_by=#{updateBy, jdbcType=VARCHAR} 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update evaluations set 
+	<trim  suffixOverrides="," >
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	<if test="mainId != null  ">
+		main_id=#{mainId},
+	</if>
+	<if test="mainType != null  ">
+		main_type=#{mainType},
+	</if>
+	<if test="isAvailable != null  ">
+		is_available=#{isAvailable},
+	</if>
+	<if test="score != null  ">
+		score=#{score},
+	</if>
+	<if test="ip != null  ">
+		ip=#{ip},
+	</if>
+	<if test="isDeleted != null  ">
+		is_deleted=#{isDeleted},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from evaluations where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 评价 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from evaluations where id = #{id}
+</select>
+
+<!-- 评价 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from evaluations 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from evaluations
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询评价列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from evaluations 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+<select id="queryAvgAssessmentRs" resultType="Object" parameterType="Object">
+	select avg(score) from evaluations where main_type=#{mainType} and main_id=#{mainId}
+</select>
+
+</mapper>   

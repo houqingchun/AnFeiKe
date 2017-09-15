@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.photos.PhotosDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.photos.Photos" >
+	<result column="id" property="id"/>
+	<result column="photo_path" property="photoPath"/>
+	<result column="description" property="description"/>
+	<result column="main_id" property="mainId"/>
+	<result column="main_type" property="mainType"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- photos table all fields -->
+<sql id="Base_Column_List" >
+	 id,photo_path,description,main_id,main_type,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and photo_path =  #{photoPath}
+</if>
+	<if test="description != null and description != ''" >
+	    and description =  #{description}
+</if>
+	<if test="mainId != null and mainId != ''" >
+	    and main_id =  #{mainId}
+</if>
+	<if test="mainType != null and mainType != ''" >
+	    and main_type =  #{mainType}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and upper(photo_path) like  CONCAT('%', upper(#{photoPath}), '%')
+	</if>
+	<if test="description != null and description != ''" >
+	    and upper(description) like  CONCAT('%', upper(#{description}), '%')
+	</if>
+	<if test="mainId != null and mainId != ''" >
+	    and upper(main_id) like  CONCAT('%', upper(#{mainId}), '%')
+	</if>
+	<if test="mainType != null and mainType != ''" >
+	    and upper(main_type) like  CONCAT('%', upper(#{mainType}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into photos(id,photo_path,description,main_id,main_type,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{photoPath, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{mainId, jdbcType=VARCHAR},#{mainType, jdbcType=VARCHAR},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update photos set photo_path=#{photoPath, jdbcType=VARCHAR},description=#{description, jdbcType=VARCHAR},main_id=#{mainId, jdbcType=VARCHAR},main_type=#{mainType, jdbcType=VARCHAR},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update photos set 
+	<trim  suffixOverrides="," >
+	<if test="photoPath != null  ">
+		photo_path=#{photoPath},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	<if test="mainId != null  ">
+		main_id=#{mainId},
+	</if>
+	<if test="mainType != null  ">
+		main_type=#{mainType},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from photos where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 照片 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from photos where id = #{id}
+</select>
+
+<!-- 照片 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from photos 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from photos
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询照片列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from photos 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

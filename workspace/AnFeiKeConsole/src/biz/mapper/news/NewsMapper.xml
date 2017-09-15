@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.news.NewsDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.news.News" >
+	<result column="id" property="id"/>
+	<result column="subject" property="subject"/>
+	<result column="photo_path" property="photoPath"/>
+	<result column="status" property="status"/>
+	<result column="types" property="types"/>
+	<result column="on_top" property="onTop"/>
+	<result column="description" property="description" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- news table all fields -->
+<sql id="Base_Column_List" >
+	 id,subject,photo_path,status,types,on_top,description,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="subject != null and subject != ''" >
+	    and subject =  #{subject}
+</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and photo_path =  #{photoPath}
+</if>
+	<if test="status != null and status != ''" >
+	    and status =  #{status}
+</if>
+	<if test="types != null and types != ''" >
+	    and types =  #{types}
+</if>
+	<if test="onTop != null and onTop != ''" >
+	    and on_top =  #{onTop}
+</if>
+	<if test="description != null and description != ''" >
+	    and description =  #{description}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="subject != null and subject != ''" >
+	    and upper(subject) like  CONCAT('%', upper(#{subject}), '%')
+	</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and upper(photo_path) like  CONCAT('%', upper(#{photoPath}), '%')
+	</if>
+	<if test="status != null and status != ''" >
+	    and upper(status) like  CONCAT('%', upper(#{status}), '%')
+	</if>
+	<if test="types != null and types != ''" >
+	    and upper(types) like  CONCAT('%', upper(#{types}), '%')
+	</if>
+	<if test="onTop != null and onTop != ''" >
+	    and upper(on_top) like  CONCAT('%', upper(#{onTop}), '%')
+	</if>
+	<if test="description != null and description != ''" >
+	    and upper(description) like  CONCAT('%', upper(#{description}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into news(id,subject,photo_path,status,types,on_top,description,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{subject, jdbcType=VARCHAR},#{photoPath, jdbcType=VARCHAR},#{status, jdbcType=VARCHAR},#{types, jdbcType=VARCHAR},#{onTop, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update news set subject=#{subject, jdbcType=VARCHAR},photo_path=#{photoPath, jdbcType=VARCHAR},status=#{status, jdbcType=VARCHAR},types=#{types, jdbcType=VARCHAR},on_top=#{onTop, jdbcType=VARCHAR},description=#{description, jdbcType=VARCHAR},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update news set 
+	<trim  suffixOverrides="," >
+	<if test="subject != null  ">
+		subject=#{subject},
+	</if>
+	<if test="photoPath != null  ">
+		photo_path=#{photoPath},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="types != null  ">
+		types=#{types},
+	</if>
+	<if test="onTop != null  ">
+		on_top=#{onTop},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from news where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 新闻 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from news where id = #{id}
+</select>
+
+<!-- 新闻 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from news 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from news
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询新闻列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from news 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

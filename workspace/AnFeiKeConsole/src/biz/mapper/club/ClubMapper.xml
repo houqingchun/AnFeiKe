@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.club.ClubDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.club.Club" >
+	<result column="id" property="id"/>
+	<result column="background" property="background" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="qualification" property="qualification" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="assurance" property="assurance" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="responsibility" property="responsibility" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="contact_us" property="contactUs" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="recruit" property="recruit" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- club table all fields -->
+<sql id="Base_Column_List" >
+	 id,background,qualification,assurance,responsibility,contact_us,recruit,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="background != null and background != ''" >
+	    and background =  #{background}
+</if>
+	<if test="qualification != null and qualification != ''" >
+	    and qualification =  #{qualification}
+</if>
+	<if test="assurance != null and assurance != ''" >
+	    and assurance =  #{assurance}
+</if>
+	<if test="responsibility != null and responsibility != ''" >
+	    and responsibility =  #{responsibility}
+</if>
+	<if test="contactUs != null and contactUs != ''" >
+	    and contact_us =  #{contactUs}
+</if>
+	<if test="recruit != null and recruit != ''" >
+	    and recruit =  #{recruit}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="background != null and background != ''" >
+	    and upper(background) like  CONCAT('%', upper(#{background}), '%')
+	</if>
+	<if test="qualification != null and qualification != ''" >
+	    and upper(qualification) like  CONCAT('%', upper(#{qualification}), '%')
+	</if>
+	<if test="assurance != null and assurance != ''" >
+	    and upper(assurance) like  CONCAT('%', upper(#{assurance}), '%')
+	</if>
+	<if test="responsibility != null and responsibility != ''" >
+	    and upper(responsibility) like  CONCAT('%', upper(#{responsibility}), '%')
+	</if>
+	<if test="contactUs != null and contactUs != ''" >
+	    and upper(contact_us) like  CONCAT('%', upper(#{contactUs}), '%')
+	</if>
+	<if test="recruit != null and recruit != ''" >
+	    and upper(recruit) like  CONCAT('%', upper(#{recruit}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into club(id,background,qualification,assurance,responsibility,contact_us,recruit,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{background, jdbcType=OTHER},#{qualification, jdbcType=OTHER},#{assurance, jdbcType=OTHER},#{responsibility, jdbcType=OTHER},#{contactUs, jdbcType=OTHER},#{recruit, jdbcType=OTHER},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update club set background=#{background, jdbcType=OTHER},qualification=#{qualification, jdbcType=OTHER},assurance=#{assurance, jdbcType=OTHER},responsibility=#{responsibility, jdbcType=OTHER},contact_us=#{contactUs, jdbcType=OTHER},recruit=#{recruit, jdbcType=OTHER},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update club set 
+	<trim  suffixOverrides="," >
+	<if test="background != null  ">
+		background=#{background},
+	</if>
+	<if test="qualification != null  ">
+		qualification=#{qualification},
+	</if>
+	<if test="assurance != null  ">
+		assurance=#{assurance},
+	</if>
+	<if test="responsibility != null  ">
+		responsibility=#{responsibility},
+	</if>
+	<if test="contactUs != null  ">
+		contact_us=#{contactUs},
+	</if>
+	<if test="recruit != null  ">
+		recruit=#{recruit},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from club where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 俱乐部 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from club where id = #{id}
+</select>
+
+<!-- 俱乐部 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from club 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from club
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询俱乐部列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from club 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

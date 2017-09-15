@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.company.CompanyDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.company.Company" >
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="photo_path" property="photoPath"/>
+	<result column="short_desc" property="shortDesc" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="service_aim" property="serviceAim"/>
+	<result column="slogan" property="slogan"/>
+	<result column="long_desc" property="longDesc" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="address" property="address"/>
+	<result column="zip" property="zip"/>
+	<result column="tel" property="tel"/>
+	<result column="mobile" property="mobile"/>
+	<result column="contact" property="contact"/>
+	<result column="hotlines" property="hotlines"/>
+	<result column="email" property="email"/>
+	<result column="icp" property="icp"/>
+	<result column="training" property="training" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="trusteeship" property="trusteeship" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="rent" property="rent" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="sale" property="sale" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="desc1" property="desc1" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="desc2" property="desc2" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="desc3" property="desc3" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="desc4" property="desc4" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="desc5" property="desc5" typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- company table all fields -->
+<sql id="Base_Column_List" >
+	 id,name,photo_path,short_desc,service_aim,slogan,long_desc,address,zip,tel,mobile,contact,hotlines,email,icp,training,trusteeship,rent,sale,desc1,desc2,desc3,desc4,desc5,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="name != null and name != ''" >
+	    and name =  #{name}
+</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and photo_path =  #{photoPath}
+</if>
+	<if test="shortDesc != null and shortDesc != ''" >
+	    and short_desc =  #{shortDesc}
+</if>
+	<if test="serviceAim != null and serviceAim != ''" >
+	    and service_aim =  #{serviceAim}
+</if>
+	<if test="slogan != null and slogan != ''" >
+	    and slogan =  #{slogan}
+</if>
+	<if test="longDesc != null and longDesc != ''" >
+	    and long_desc =  #{longDesc}
+</if>
+	<if test="address != null and address != ''" >
+	    and address =  #{address}
+</if>
+	<if test="zip != null and zip != ''" >
+	    and zip =  #{zip}
+</if>
+	<if test="tel != null and tel != ''" >
+	    and tel =  #{tel}
+</if>
+	<if test="mobile != null and mobile != ''" >
+	    and mobile =  #{mobile}
+</if>
+	<if test="contact != null and contact != ''" >
+	    and contact =  #{contact}
+</if>
+<if test="hotlines != null and hotlines != ''" >
+	    and hotlines =  #{hotlines}
+</if>
+	<if test="email != null and email != ''" >
+	    and email =  #{email}
+</if>
+	<if test="icp != null and icp != ''" >
+	    and icp =  #{icp}
+</if>
+	<if test="training != null and training != ''" >
+	    and training =  #{training}
+</if>
+	<if test="trusteeship != null and trusteeship != ''" >
+	    and trusteeship =  #{trusteeship}
+</if>
+	<if test="rent != null and rent != ''" >
+	    and rent =  #{rent}
+</if>
+	<if test="sale != null and sale != ''" >
+	    and sale =  #{sale}
+</if>
+	<if test="desc1 != null and desc1 != ''" >
+	    and desc1 =  #{desc1}
+</if>
+	<if test="desc2 != null and desc2 != ''" >
+	    and desc2 =  #{desc2}
+</if>
+	<if test="desc3 != null and desc3 != ''" >
+	    and desc3 =  #{desc3}
+</if>
+	<if test="desc4 != null and desc4 != ''" >
+	    and desc4 =  #{desc4}
+</if>
+	<if test="desc5 != null and desc5 != ''" >
+	    and desc5 =  #{desc5}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="name != null and name != ''" >
+	    and upper(name) like  CONCAT('%', upper(#{name}), '%')
+	</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and upper(photo_path) like  CONCAT('%', upper(#{photoPath}), '%')
+	</if>
+	<if test="shortDesc != null and shortDesc != ''" >
+	    and upper(short_desc) like  CONCAT('%', upper(#{shortDesc}), '%')
+	</if>
+	<if test="serviceAim != null and serviceAim != ''" >
+	    and upper(service_aim) like  CONCAT('%', upper(#{serviceAim}), '%')
+	</if>
+	<if test="slogan != null and slogan != ''" >
+	    and upper(slogan) like  CONCAT('%', upper(#{slogan}), '%')
+	</if>
+	<if test="longDesc != null and longDesc != ''" >
+	    and upper(long_desc) like  CONCAT('%', upper(#{longDesc}), '%')
+	</if>
+	<if test="address != null and address != ''" >
+	    and upper(address) like  CONCAT('%', upper(#{address}), '%')
+	</if>
+	<if test="zip != null and zip != ''" >
+	    and upper(zip) like  CONCAT('%', upper(#{zip}), '%')
+	</if>
+	<if test="tel != null and tel != ''" >
+	    and upper(tel) like  CONCAT('%', upper(#{tel}), '%')
+	</if>
+	<if test="mobile != null and mobile != ''" >
+	    and upper(mobile) like  CONCAT('%', upper(#{mobile}), '%')
+	</if>
+	<if test="contact != null and contact != ''" >
+	    and upper(contact) like  CONCAT('%', upper(#{contact}), '%')
+	</if>
+	<if test="hotlines != null and hotlines != ''" >
+	    and upper(hotlines) like  CONCAT('%', upper(#{hotlines}), '%')
+	</if>
+	<if test="email != null and email != ''" >
+	    and upper(email) like  CONCAT('%', upper(#{email}), '%')
+	</if>
+	<if test="icp != null and icp != ''" >
+	    and upper(icp) like  CONCAT('%', upper(#{icp}), '%')
+	</if>
+	<if test="training != null and training != ''" >
+	    and upper(training) like  CONCAT('%', upper(#{training}), '%')
+	</if>
+	<if test="trusteeship != null and trusteeship != ''" >
+	    and upper(trusteeship) like  CONCAT('%', upper(#{trusteeship}), '%')
+	</if>
+	<if test="rent != null and rent != ''" >
+	    and upper(rent) like  CONCAT('%', upper(#{rent}), '%')
+	</if>
+	<if test="sale != null and sale != ''" >
+	    and upper(sale) like  CONCAT('%', upper(#{sale}), '%')
+	</if>
+	<if test="desc1 != null and desc1 != ''" >
+	    and upper(desc1) like  CONCAT('%', upper(#{desc1}), '%')
+	</if>
+	<if test="desc2 != null and desc2 != ''" >
+	    and upper(desc2) like  CONCAT('%', upper(#{desc2}), '%')
+	</if>
+	<if test="desc3 != null and desc3 != ''" >
+	    and upper(desc3) like  CONCAT('%', upper(#{desc3}), '%')
+	</if>
+	<if test="desc4 != null and desc4 != ''" >
+	    and upper(desc4) like  CONCAT('%', upper(#{desc4}), '%')
+	</if>
+	<if test="desc5 != null and desc5 != ''" >
+	    and upper(desc5) like  CONCAT('%', upper(#{desc5}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into company(id,name,photo_path,short_desc,service_aim,slogan,long_desc,address,zip,tel,mobile,contact,hotlines,email,icp,training,trusteeship,rent,sale,desc1,desc2,desc3,desc4,desc5,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{photoPath, jdbcType=VARCHAR},#{shortDesc, jdbcType=OTHER},#{serviceAim, jdbcType=VARCHAR},#{slogan, jdbcType=VARCHAR},#{longDesc, jdbcType=OTHER},#{address, jdbcType=VARCHAR},#{zip, jdbcType=VARCHAR},#{tel, jdbcType=VARCHAR},#{mobile, jdbcType=VARCHAR},#{contact, jdbcType=VARCHAR},#{hotlines, jdbcType=VARCHAR},#{email, jdbcType=VARCHAR},#{icp, jdbcType=VARCHAR},#{training, jdbcType=OTHER},#{trusteeship, jdbcType=OTHER},#{rent, jdbcType=OTHER},#{sale, jdbcType=OTHER},#{desc1, jdbcType=OTHER},#{desc2, jdbcType=OTHER},#{desc3, jdbcType=OTHER},#{desc4, jdbcType=OTHER},#{desc5, jdbcType=OTHER},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update company set name=#{name, jdbcType=VARCHAR},photo_path=#{photoPath, jdbcType=VARCHAR},short_desc=#{shortDesc, jdbcType=OTHER},service_aim=#{serviceAim, jdbcType=VARCHAR},slogan=#{slogan, jdbcType=VARCHAR},long_desc=#{longDesc, jdbcType=OTHER},address=#{address, jdbcType=VARCHAR},zip=#{zip, jdbcType=VARCHAR},tel=#{tel, jdbcType=VARCHAR},mobile=#{mobile, jdbcType=VARCHAR},contact=#{contact, jdbcType=VARCHAR},hotlines=#{hotlines, jdbcType=VARCHAR},email=#{email, jdbcType=VARCHAR},icp=#{icp, jdbcType=VARCHAR},training=#{training, jdbcType=OTHER},trusteeship=#{trusteeship, jdbcType=OTHER},rent=#{rent, jdbcType=OTHER},sale=#{sale, jdbcType=OTHER},desc1=#{desc1, jdbcType=OTHER},desc2=#{desc2, jdbcType=OTHER},desc3=#{desc3, jdbcType=OTHER},desc4=#{desc4, jdbcType=OTHER},desc5=#{desc5, jdbcType=OTHER},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update company set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="photoPath != null  ">
+		photo_path=#{photoPath},
+	</if>
+	<if test="shortDesc != null  ">
+		short_desc=#{shortDesc},
+	</if>
+	<if test="serviceAim != null  ">
+		service_aim=#{serviceAim},
+	</if>
+	<if test="slogan != null  ">
+		slogan=#{slogan},
+	</if>
+	<if test="longDesc != null  ">
+		long_desc=#{longDesc},
+	</if>
+	<if test="address != null  ">
+		address=#{address},
+	</if>
+	<if test="zip != null  ">
+		zip=#{zip},
+	</if>
+	<if test="tel != null  ">
+		tel=#{tel},
+	</if>
+	<if test="mobile != null  ">
+		mobile=#{mobile},
+	</if>
+	<if test="contact != null  ">
+		contact=#{contact},
+	</if>
+	<if test="hotlines != null  ">
+		hotlines=#{hotlines},
+	</if>
+	<if test="email != null  ">
+		email=#{email},
+	</if>
+	<if test="icp != null  ">
+		icp=#{icp},
+	</if>
+	<if test="training != null  ">
+		training=#{training},
+	</if>
+	<if test="trusteeship != null  ">
+		trusteeship=#{trusteeship},
+	</if>
+	<if test="rent != null  ">
+		rent=#{rent},
+	</if>
+	<if test="sale != null  ">
+		sale=#{sale},
+	</if>
+	<if test="desc1 != null  ">
+		desc1=#{desc1},
+	</if>
+	<if test="desc2 != null  ">
+		desc2=#{desc2},
+	</if>
+	<if test="desc3 != null  ">
+		desc3=#{desc3},
+	</if>
+	<if test="desc4 != null  ">
+		desc4=#{desc4},
+	</if>
+	<if test="desc5 != null  ">
+		desc5=#{desc5},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from company where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 公司信息 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from company where id = #{id}
+</select>
+
+<!-- 公司信息 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from company 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from company
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询公司信息列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from company 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

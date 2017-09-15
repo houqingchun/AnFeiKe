@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.recruit.RecruitDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.recruit.Recruit" >
+	<result column="id" property="id"/>
+	<result column="job_title" property="jobTitle"/>
+	<result column="job_base" property="jobBase"/>
+	<result column="head_count" property="headCount"/>
+	<result column="job_req" property="jobReq"  typeHandler="com.base.util.ConvertBlobTypeHandler"/>
+	<result column="open_date" property="openDate"/>
+	<result column="contact" property="contact"/>
+	<result column="tel" property="tel"/>
+	<result column="mobile" property="mobile"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- recruit table all fields -->
+<sql id="Base_Column_List" >
+	 id,job_title,job_base,head_count,job_req,open_date,contact,tel,mobile,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="jobTitle != null and jobTitle != ''" >
+	    and job_title =  #{jobTitle}
+</if>
+	<if test="jobBase != null and jobBase != ''" >
+	    and job_base =  #{jobBase}
+</if>
+	<if test="headCount != null and headCount != ''" >
+	    and head_count =  #{headCount}
+</if>
+	<if test="jobReq != null and jobReq != ''" >
+	    and job_req =  #{jobReq}
+</if>
+	<if test="openDate != null and openDate != ''" >
+	    and open_date =  #{openDate}
+</if>
+	<if test="contact != null and contact != ''" >
+	    and contact =  #{contact}
+</if>
+	<if test="tel != null and tel != ''" >
+	    and tel =  #{tel}
+</if>
+	<if test="mobile != null and mobile != ''" >
+	    and mobile =  #{mobile}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="jobTitle != null and jobTitle != ''" >
+	    and upper(job_title) like  CONCAT('%', upper(#{jobTitle}), '%')
+	</if>
+	<if test="jobBase != null and jobBase != ''" >
+	    and upper(job_base) like  CONCAT('%', upper(#{jobBase}), '%')
+	</if>
+	<if test="headCount != null and headCount != ''" >
+	    and upper(head_count) like  CONCAT('%', upper(#{headCount}), '%')
+	</if>
+	<if test="jobReq != null and jobReq != ''" >
+	    and upper(job_req) like  CONCAT('%', upper(#{jobReq}), '%')
+	</if>
+	<if test="openDate != null and openDate != ''" >
+	    and upper(open_date) like  CONCAT('%', upper(#{openDate}), '%')
+	</if>
+	<if test="contact != null and contact != ''" >
+	    and upper(contact) like  CONCAT('%', upper(#{contact}), '%')
+	</if>
+	<if test="tel != null and tel != ''" >
+	    and upper(tel) like  CONCAT('%', upper(#{tel}), '%')
+	</if>
+	<if test="mobile != null and mobile != ''" >
+	    and upper(mobile) like  CONCAT('%', upper(#{mobile}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into recruit(id,job_title,job_base,head_count,job_req,open_date,contact,tel,mobile,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{jobTitle, jdbcType=VARCHAR},#{jobBase, jdbcType=VARCHAR},#{headCount, jdbcType=INTEGER},#{jobReq, jdbcType=OTHER},#{openDate, jdbcType=DATE},#{contact, jdbcType=VARCHAR},#{tel, jdbcType=VARCHAR},#{mobile, jdbcType=VARCHAR},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update recruit set job_title=#{jobTitle, jdbcType=VARCHAR},job_base=#{jobBase, jdbcType=VARCHAR},head_count=#{headCount, jdbcType=INTEGER},job_req=#{jobReq, jdbcType=OTHER},open_date=#{openDate, jdbcType=DATE},contact=#{contact, jdbcType=VARCHAR},tel=#{tel, jdbcType=VARCHAR},mobile=#{mobile, jdbcType=VARCHAR},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update recruit set 
+	<trim  suffixOverrides="," >
+	<if test="jobTitle != null  ">
+		job_title=#{jobTitle},
+	</if>
+	<if test="jobBase != null  ">
+		job_base=#{jobBase},
+	</if>
+	<if test="headCount != null  ">
+		head_count=#{headCount},
+	</if>
+	<if test="jobReq != null  ">
+		job_req=#{jobReq},
+	</if>
+	<if test="openDate != null  ">
+		open_date=#{openDate},
+	</if>
+	<if test="contact != null  ">
+		contact=#{contact},
+	</if>
+	<if test="tel != null  ">
+		tel=#{tel},
+	</if>
+	<if test="mobile != null  ">
+		mobile=#{mobile},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from recruit where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 职位 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from recruit where id = #{id}
+</select>
+
+<!-- 职位 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from recruit 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from recruit
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询职位列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from recruit 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

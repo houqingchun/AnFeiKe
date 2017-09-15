@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.band.BandDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.band.Band" >
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="photo_path" property="photoPath"/>
+	<result column="status" property="status"/>
+	<result column="province" property="province"/>
+	<result column="city" property="city"/>
+	<result column="style" property="style"/>
+	<result column="style_comment" property="styleComment"/>
+	<result column="formation" property="formation"/>
+	<result column="staff_composition" property="staffComposition"/>
+	<result column="leader_gender" property="leaderGender"/>
+	<result column="is_original" property="isOriginal"/>
+	<result column="is_stationed" property="isStationed"/>
+	<result column="is_academic" property="isAcademic"/>
+	<result column="qualification" property="qualification"/>
+	<result column="lower_price" property="lowerPrice"/>
+	<result column="high_price" property="highPrice"/>
+	<result column="price_unit" property="priceUnit"/>
+	<result column="description" property="description"/>
+	<result column="contact" property="contact"/>
+	<result column="mobile" property="mobile"/>
+	<result column="hit" property="hit"/>
+	<result column="integrity" property="integrity"/>
+	<result column="create_by" property="createBy"/>
+	<result column="create_time" property="createTime"/>
+	<result column="update_by" property="updateBy"/>
+	<result column="update_time" property="updateTime"/>
+</resultMap>
+       
+<!-- band table all fields -->
+<sql id="Base_Column_List" >
+	 id,name,photo_path,status,province,city,style,style_comment,formation,staff_composition,leader_gender,is_original,is_stationed,is_academic,qualification,lower_price,high_price,price_unit,description,contact,mobile,hit,integrity,create_by,create_time,update_by,update_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="name != null and name != ''" >
+	    and name =  #{name}
+</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and photo_path =  #{photoPath}
+</if>
+<if test="status != null and status != ''" >
+	    and status =  #{status}
+</if>
+	<if test="province != null and province != ''" >
+	    and province =  #{province}
+</if>
+	<if test="city != null and city != ''" >
+	    and city =  #{city}
+</if>
+	<if test="style != null and style != ''" >
+	    and style =  #{style}
+</if>
+<if test="styleComment != null and styleComment != ''" >
+	    and style_comment =  #{styleComment}
+</if>
+	<if test="formation != null and formation != ''" >
+	    and formation =  #{formation}
+</if>
+	<if test="staffComposition != null and staffComposition != ''" >
+	    and staff_composition =  #{staffComposition}
+</if>
+	<if test="leaderGender != null and leaderGender != ''" >
+	    and leader_gender =  #{leaderGender}
+</if>
+	<if test="isOriginal != null and isOriginal != ''" >
+	    and is_original =  #{isOriginal}
+</if>
+	<if test="isStationed != null and isStationed != ''" >
+	    and is_stationed =  #{isStationed}
+</if>
+	<if test="isAcademic != null and isAcademic != ''" >
+	    and is_academic =  #{isAcademic}
+</if>
+	<if test="qualification != null and qualification != ''" >
+	    and qualification =  #{qualification}
+</if>
+	<if test="lowerPrice != null and lowerPrice != ''" >
+	    and lower_price =  #{lowerPrice}
+</if>
+	<if test="highPrice != null and highPrice != ''" >
+	    and high_price =  #{highPrice}
+</if>
+	<if test="priceUnit != null and priceUnit != ''" >
+	    and price_unit =  #{priceUnit}
+</if>
+	<if test="description != null and description != ''" >
+	    and description =  #{description}
+</if>
+	<if test="contact != null and contact != ''" >
+	    and contact =  #{contact}
+</if>
+	<if test="mobile != null and mobile != ''" >
+	    and mobile =  #{mobile}
+</if>
+	<if test="hit != null and hit != ''" >
+	    and hit =  #{hit}
+</if>
+	<if test="integrity != null and integrity != ''" >
+	    and integrity =  #{integrity}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="name != null and name != ''" >
+	    and upper(name) like  CONCAT('%', upper(#{name}), '%')
+	</if>
+	<if test="photoPath != null and photoPath != ''" >
+	    and upper(photo_path) like  CONCAT('%', upper(#{photoPath}), '%')
+	</if>
+	<if test="status != null and status != ''" >
+	    and upper(status) =  upper(#{status})
+	</if>
+	<if test="province != null and province != ''" >
+	    and upper(province) like  CONCAT('%', upper(#{province}), '%')
+	</if>
+	<if test="city != null and city != ''" >
+	    and upper(city) like  CONCAT('%', upper(#{city}), '%')
+	</if>
+	<if test="style != null and style != ''" >
+	    and upper(style) like  CONCAT('%', upper(#{style}), '%')
+	</if>
+	<if test="styleComment != null and styleComment != ''" >
+	    and upper(style_comment) like  CONCAT('%', upper(#{styleComment}), '%')
+	</if>
+	<if test="formation != null and formation != ''" >
+	    and upper(formation) like  CONCAT('%', upper(#{formation}), '%')
+	</if>
+	<if test="staffComposition != null and staffComposition != ''" >
+	    and upper(staff_composition) like  CONCAT('%', upper(#{staffComposition}), '%')
+	</if>
+	<if test="leaderGender != null and leaderGender != ''" >
+	    and upper(leader_gender) like  CONCAT('%', upper(#{leaderGender}), '%')
+	</if>
+	<if test="isOriginal != null and isOriginal != ''" >
+	    and upper(is_original) like  CONCAT('%', upper(#{isOriginal}), '%')
+	</if>
+	<if test="isStationed != null and isStationed != ''" >
+	    and upper(is_stationed) like  CONCAT('%', upper(#{isStationed}), '%')
+	</if>
+	<if test="isAcademic != null and isAcademic != ''" >
+	    and upper(is_academic) like  CONCAT('%', upper(#{isAcademic}), '%')
+	</if>
+	<if test="qualification != null and qualification != ''" >
+	    and upper(qualification) like  CONCAT('%', upper(#{qualification}), '%')
+	</if>
+	<if test="lowerPrice != null and lowerPrice != '' and highPrice != null and highPrice != ''" >
+	    and ( 
+	    	lower_price &gt; #{lowerPrice} and lower_price &lt;= #{highPrice}
+	    	or 
+	    	high_price &gt;= #{lowerPrice} and high_price &lt; #{highPrice}
+	    	or 
+	    	lower_price &lt; #{lowerPrice} and high_price &gt; #{highPrice}
+	    	or 
+	    	lower_price &gt;= #{lowerPrice} and high_price &lt;= #{highPrice}
+	    )
+	</if>
+	<if test="priceUnit != null and priceUnit != ''" >
+	    and upper(price_unit) like  CONCAT('%', upper(#{priceUnit}), '%')
+	</if>
+	<if test="description != null and description != ''" >
+	    and upper(description) like  CONCAT('%', upper(#{description}), '%')
+	</if>
+	<if test="contact != null and contact != ''" >
+	    and upper(contact) like  CONCAT('%', upper(#{contact}), '%')
+	</if>
+	<if test="mobile != null and mobile != ''" >
+	    and upper(mobile) like  CONCAT('%', upper(#{mobile}), '%')
+	</if>
+	<if test="hit != null and hit != ''" >
+	    and upper(hit) like  CONCAT('%', upper(#{hit}), '%')
+	</if>
+	<if test="integrity != null and integrity != ''" >
+	    and upper(integrity) like  CONCAT('%', upper(#{integrity}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into band(id,name,photo_path,status,province,city,style,style_comment,formation,staff_composition,leader_gender,is_original,is_stationed,is_academic,qualification,lower_price,high_price,price_unit,description,contact,mobile,hit,integrity,create_by,create_time,update_by,update_time) values( #{id, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{photoPath, jdbcType=VARCHAR},#{status, jdbcType=VARCHAR},#{province, jdbcType=VARCHAR},#{city, jdbcType=VARCHAR},#{style, jdbcType=VARCHAR},#{styleComment, jdbcType=VARCHAR},#{formation, jdbcType=VARCHAR},#{staffComposition, jdbcType=VARCHAR},#{leaderGender, jdbcType=VARCHAR},#{isOriginal, jdbcType=CHAR},#{isStationed, jdbcType=CHAR},#{isAcademic, jdbcType=CHAR},#{qualification, jdbcType=VARCHAR},#{lowerPrice, jdbcType=OTHER},#{highPrice, jdbcType=OTHER},#{priceUnit, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{contact, jdbcType=VARCHAR},#{mobile, jdbcType=VARCHAR},#{hit, jdbcType=OTHER},#{integrity, jdbcType=OTHER},#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR},now())
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update band set name=#{name, jdbcType=VARCHAR},photo_path=#{photoPath, jdbcType=VARCHAR},status=#{status, jdbcType=VARCHAR},province=#{province, jdbcType=VARCHAR},city=#{city, jdbcType=VARCHAR},style=#{style, jdbcType=VARCHAR},style_comment=#{styleComment, jdbcType=VARCHAR},formation=#{formation, jdbcType=VARCHAR},staff_composition=#{staffComposition, jdbcType=VARCHAR},leader_gender=#{leaderGender, jdbcType=VARCHAR},is_original=#{isOriginal, jdbcType=CHAR},is_stationed=#{isStationed, jdbcType=CHAR},is_academic=#{isAcademic, jdbcType=CHAR},qualification=#{qualification, jdbcType=VARCHAR},lower_price=#{lowerPrice, jdbcType=OTHER},high_price=#{highPrice, jdbcType=OTHER},price_unit=#{priceUnit, jdbcType=VARCHAR},description=#{description, jdbcType=VARCHAR},contact=#{contact, jdbcType=VARCHAR},mobile=#{mobile, jdbcType=VARCHAR},hit=#{hit, jdbcType=VARCHAR},integrity=#{integrity, jdbcType=VARCHAR},update_by=#{updateBy, jdbcType=VARCHAR},update_time=now() 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update band set 
+	<trim  suffixOverrides="," >
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="photoPath != null  ">
+		photo_path=#{photoPath},
+	</if>
+	<if test="status != null  ">
+		status=#{status},
+	</if>
+	<if test="province != null  ">
+		province=#{province},
+	</if>
+	<if test="city != null  ">
+		city=#{city},
+	</if>
+	<if test="style != null  ">
+		style=#{style},
+	</if>
+	<if test="styleComment != null  ">
+		style_comment=#{styleComment},
+	</if>
+	<if test="formation != null  ">
+		formation=#{formation},
+	</if>
+	<if test="staffComposition != null  ">
+		staff_composition=#{staffComposition},
+	</if>
+	<if test="leaderGender != null  ">
+		leader_gender=#{leaderGender},
+	</if>
+	<if test="isOriginal != null  ">
+		is_original=#{isOriginal},
+	</if>
+	<if test="isStationed != null  ">
+		is_stationed=#{isStationed},
+	</if>
+	<if test="isAcademic != null  ">
+		is_academic=#{isAcademic},
+	</if>
+	<if test="qualification != null  ">
+		qualification=#{qualification},
+	</if>
+	<if test="lowerPrice != null  ">
+		lower_price=#{lowerPrice},
+	</if>
+	<if test="highPrice != null  ">
+		high_price=#{highPrice},
+	</if>
+	<if test="priceUnit != null  ">
+		price_unit=#{priceUnit},
+	</if>
+	<if test="description != null  ">
+		description=#{description},
+	</if>
+	<if test="contact != null  ">
+		contact=#{contact},
+	</if>
+	<if test="mobile != null  ">
+		mobile=#{mobile},
+	</if>
+	<if test="hit != null  ">
+		hit=#{hit},
+	</if>
+	<if test="integrity != null  ">
+		integrity=#{integrity},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from band where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 乐队 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from band where id = #{id}
+</select>
+
+<!-- 乐队 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from band 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from band
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询乐队列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from band 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+
+
+<select id="queryHitsById"  resultMap="BaseResultMap" parameterType="Object">
+	select id,hit 
+	 from band where 
+	 	<foreach item="item" index="index" collection="list"
+            open="(" separator=" or " close=")">
+			<if test="item != null">
+				id = #{item}
+			</if>
+    	</foreach>
+</select>
+
+<update id="increaseHitsById" parameterType="Object" >
+  	 update band set hit=hit+1  
+	 where id=#{id}
+</update>
+
+  	
+</mapper>   

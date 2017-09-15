@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="biz.dao.dict.DataDictionaryDao" >
+<cache />  
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="biz.entity.dict.DataDictionary" >
+	<result column="id" property="id"/>
+	<result column="code" property="code"/>
+	<result column="type" property="type"/>
+	<result column="name" property="name"/>
+	<result column="name_number" property="nameNumber"/>
+	<result column="create_time" property="createTime"/>
+	<result column="create_by" property="createBy"/>
+	<result column="update_time" property="updateTime"/>
+	<result column="update_by" property="updateBy"/>
+</resultMap>
+       
+<!-- data_dictionary table all fields -->
+<sql id="Base_Column_List" >
+	 id,code,type,name,name_number,create_time,create_by,update_time,update_by
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+</if>
+	<if test="code != null and code != ''" >
+	    and code =  #{code}
+</if>
+	<if test="type != null and type != ''" >
+	    and type =  #{type}
+</if>
+	<if test="name != null and name != ''" >
+	    and name =  #{name}
+</if>
+	<if test="nameNumber != null and nameNumber != ''" >
+	    and name_number =  #{nameNumber}
+</if>
+	<if test="createTime != null and createTime != ''" >
+	    and create_time =  #{createTime}
+</if>
+	<if test="createBy != null and createBy != ''" >
+	    and create_by =  #{createBy}
+</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and update_time =  #{updateTime}
+</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and update_by =  #{updateBy}
+</if>
+</trim>
+</sql>
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause_Fuzzy">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and upper(id) like  CONCAT('%', upper(#{id}), '%')
+	</if>
+	<if test="code != null and code != ''" >
+	    and upper(code) like  CONCAT('%', upper(#{code}), '%')
+	</if>
+	<if test="type != null and type != ''" >
+	    and upper(type) like  CONCAT('%', upper(#{type}), '%')
+	</if>
+	<if test="name != null and name != ''" >
+	    and upper(name) like  CONCAT('%', upper(#{name}), '%')
+	</if>
+	<if test="nameNumber != null and nameNumber != ''" >
+	    and upper(name_number) like  CONCAT('%', upper(#{nameNumber}), '%')
+	</if>
+	<if test="createTime != null and createTime != ''" >
+	    and upper(create_time) like  CONCAT('%', upper(#{createTime}), '%')
+	</if>
+	<if test="createBy != null and createBy != ''" >
+	    and upper(create_by) like  CONCAT('%', upper(#{createBy}), '%')
+	</if>
+	<if test="updateTime != null and updateTime != ''" >
+	    and upper(update_time) like  CONCAT('%', upper(#{updateTime}), '%')
+	</if>
+	<if test="updateBy != null and updateBy != ''" >
+	    and upper(update_by) like  CONCAT('%', upper(#{updateBy}), '%')
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  insert into data_dictionary(id,code,type,name,name_number,create_time,create_by,update_time,update_by) values( #{id, jdbcType=VARCHAR},#{code, jdbcType=VARCHAR},#{type, jdbcType=VARCHAR},#{name, jdbcType=VARCHAR},#{nameNumber, jdbcType=INTEGER},now(),#{createBy, jdbcType=VARCHAR},now(),#{updateBy, jdbcType=VARCHAR})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  	 update data_dictionary set code=#{code, jdbcType=VARCHAR},type=#{type, jdbcType=VARCHAR},name=#{name, jdbcType=VARCHAR},name_number=#{nameNumber, jdbcType=INTEGER},update_time=now(),update_by=#{updateBy, jdbcType=VARCHAR} 
+	 where id=#{id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+		 update data_dictionary set 
+	<trim  suffixOverrides="," >
+	<if test="code != null  ">
+		code=#{code},
+	</if>
+	<if test="type != null  ">
+		type=#{type},
+	</if>
+	<if test="name != null  ">
+		name=#{name},
+	</if>
+	<if test="nameNumber != null  ">
+		name_number=#{nameNumber},
+	</if>
+	<if test="createTime != null  ">
+		create_time=#{createTime},
+	</if>
+	<if test="createBy != null  ">
+		create_by=#{createBy},
+	</if>
+	<if test="updateTime != null  ">
+		update_time=#{updateTime},
+	</if>
+	<if test="updateBy != null  ">
+		update_by=#{updateBy},
+	</if>
+	</trim> 
+	 where id=#{id} and update_time &lt; #{ updateTime }
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+		 delete 	 from data_dictionary where id = #{id}
+</delete>
+ 
+<!-- 根据id查询 数据字典 -->
+<select id="queryById"  resultMap="BaseResultMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from data_dictionary where id = #{id}
+</select>
+
+<!-- 数据字典 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from data_dictionary 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+</select>  	
+
+<!-- 查询数据数据（唯一性检查） -->
+<select id="queryUniqueObjCount" resultType="java.lang.Integer"
+	parameterType="Object">
+	select count(1) from data_dictionary
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查询数据字典列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from data_dictionary 
+	<include refid="Example_Where_Clause_Fuzzy"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   
